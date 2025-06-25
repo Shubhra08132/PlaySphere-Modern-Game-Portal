@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Block Stacker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Intro Screen -->
+  <div class="intro-screen" id="intro-screen">
+    <h1>Block Stacker</h1>
+    <p id="discript">
+      Test your timing with every drop!<br>
+      Stack the blocks as high as you can before they topple.<br>
+      The more precise your placement, the longer you last.<br>
+      With every round, sharpen your focus and master the perfect stack!
+    </p> 
+    <button id="start-btn">Play</button>
+  </div>
+
+  <!-- Game Menu Button (Top-Left) -->
+<div id="menu-button" class="hidden">
+  <button id="menu-toggle">Menu ☰</button>
+  <div id="menu-dropdown" class="dropdown hidden">
+    <button onclick="restartGame()">Restart</button>
+    <button onclick="showInstructions()">Instructions</button>
+    <button onclick="backToMenu()">Exit</button>
+  </div>
+</div>
+
+  <!-- Game Area -->
+  <div id="game-container" class="hidden">
+    <canvas id="game-canvas" width="400" height="600"></canvas>
+    <div id="score">Score: 0</div>
+    <div id="game-over-message" class="hidden">
+      <h2>Game Over</h2>
+      <p>Your Score: <span id="final-score">0</span></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
