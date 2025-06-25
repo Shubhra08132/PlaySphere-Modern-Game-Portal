@@ -1,0 +1,77 @@
+
+body {
+  background-color: #c9eac3;
+  color: #FFE3BB;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;   /* This vertically centers all children */
+  padding: 20px 60px;
+  background: #3D8D7A;
+  color: #A3D1C6;
+  height: 90px;  /* Optional: sets consistent height */
+  padding: 10px 20px;
+}
+header .logo {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.logo {
+  font-size: 18px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 50px; /* space between nav items */
+}
+nav a {
+  height: 30px;
+  color: #A3D1C6;; /* change to any color you want */
+  text-decoration: none;
+  display: inline-block; 
+}
+
+
+  /* gap: 15px; */
+
+
+main {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #3D8D7A;
+  margin-bottom: 20px;
+}
+
+select {
+  font-family: inherit;
+  padding: 8px;
+  background-color: #3D8D7A;
+  color: white;
+  border: none;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #3D8D7A;
+}
+
+th {
+  background-color: #3D8D7A;
+}

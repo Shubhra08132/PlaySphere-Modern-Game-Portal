@@ -1,0 +1,67 @@
+body {
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: #111;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: #00ffff;
+}
+
+#maze {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  margin: 20px auto;
+  border: 3px solid #00ffff;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid #222;
+  transition: background 0.2s;
+}
+
+.wall { background: #222; }
+.path { background: #1c1c1c; }
+.player { background: #007bff; }
+.goal { background: #00ff88; }
+
+.controls {
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 16px;
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+button:hover {
+  background: #00ffff;
+  color: #000;
+}
+
+#timer {
+  display: inline-block;
+  margin-left: 15px;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+#status {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}

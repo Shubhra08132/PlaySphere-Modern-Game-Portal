@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flip & Match Game</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="menu-panel" class="hidden">
+  <div class="menu-box">
+    <button onclick="restartGame()"> Restart</button>
+    <button onclick="toggleMenu()"> Instructions</button>
+    <button onclick="location.reload()"> Quit</button>
+  </div>
+</div>
+
+  <!-- Intro Screen -->
+  <div class="intro-screen" id="intro-screen">
+    <h1> Flip & Match</h1>
+    <p id="discript">Test your memory with every flip!<br>
+    Race against the clock to find all the pairs as quickly<br>as possible.<br>
+    The faster you finish, the higher your score!<br> 
+    With each round, sharpen your focus and improve<br>your recall.</p> 
+      <div class="teaser-container">
+  <img src="Avatar.png" alt="Avatar" class="avatar-bob" />
+  <div class="ready-text">“Ready to flip?”</div>
+</div>
+  </div>
+
+
+  <button id="start-btn">Play</button>
+
+  <!-- Game Screen -->
+  <div class="game-screen hidden" id="game-screen">
+    <button id="menu-btn">☰ Menu</button>
+    <h2>Flip the Cards</h2>
+    <div class="game-board" id="game-board"></div>
+    <p id="status">Match all the pairs!</p>
+    <div id="timer">Time: 0s</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

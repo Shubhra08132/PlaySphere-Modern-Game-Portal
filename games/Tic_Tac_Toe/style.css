@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #225E63;
+  text-align: center;
+  background: #C6E5B3;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#main-menu h1 {
+  animation: slideIn 0.8s ease-in-out;
+  font-weight: bold;
+  font-size: 5em;
+  margin: 0;
+  padding: 20px;
+  position: fixed;
+  text-shadow: 2px 2px #EEEFE0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* background: #1abc9c; Optional: so content doesn't go under the text */
+  z-index: 1000; /* Make sure it stays above other elements */
+  text-align: center;
+}
+ #discript
+ {
+  animation: fadeIn 1s ease-in-out;
+  position: fixed;
+  top:120px;
+  left:27%;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+  max-width: 800px;
+  padding: 10px;
+  z-index: 999;
+ }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* 
+#backBtn {
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #225E63;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #1abc9c;
+} */
+
+
+#main-menu button:hover {
+  background-color: #2563eb;
+}
+
+#difficulty-select p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+
+#board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: #225E63;
+  border: 2px solid #EEEFE0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cell.x {
+  color: #0ABAB5;
+}
+
+.cell.o {
+
+  color: #FFEDF3;
+}
+
+button {
+  padding: 10px 20px;
+  background-color:#225E63;
+  color: #ffffff;
+  border: 2px solid #225E63;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 5px #EEEFE0;
+  margin: 10px 5px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+#status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 15px 0;
+  color: #225E63;
+
+}
+
+#scoreboard {
+  margin-top: 20px;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #225E63;
+}
+
+#backButton {
+  position: absolute;
+  font-weight: bold;
+  top: 10px;
+  left: 10px;
+  color: #ffffff;
+}
+
+#win-line {
+  position: absolute;
+  height: 5px;
+  background-color: #3b82f6;
+  display:none;  /*initially hidden */
+  z-index:9999;
+  pointer-events: none;
+  transform-origin: 0% 50%;
+  /* width will be set dynamically by JS */
+}
+
+@media (max-width: 600px) {
+  #main-menu h1 {
+    font-size: 2.5em;
+  }
+  #discript {
+    font-size: 1em;
+  }
+  #mode-buttons button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+}

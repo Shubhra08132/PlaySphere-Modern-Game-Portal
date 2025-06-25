@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="main-menu">
+    <h1>Tic Tac Toe</h1>
+<p id="discript">
+  <strong>A timeless classic with a modern twist!</strong><br>
+  Challenge your brain in this strategic 2-player grid game.<br>
+  Whether you're X or O, the goal is simple: align three in a row before your opponent.<br>
+  Play with a friend or test your skills against the AI for endless fun!
+</p>
+
+    <button onclick="selectMode('single')">Single Player</button>
+      <div id="difficulty-select" style="display:none; margin-top: 10px;">
+      <p>Choose Difficulty:</p>
+      <button onclick="startGame('easy')">Easy</button>
+      <button onclick="startGame('hard')">Hard</button>
+    </div>
+    <button onclick="selectMode('multi')">Two Player</button>
+
+  </div>
+  <button id="backBtn" style="display: none;">⬅ Back</button>
+
+  <div id="game" style="display:none;">
+    <button id="backButton" onclick="goBack()">⬅ Back</button>
+    <h1>Tic Tac Toe</h1>
+    <div id="board">
+      <div class="cell" data-index="0"></div>
+    <div id="win-line"></div>
+    </div>
+    <div id="status"></div>
+    <button id="restartButton" onclick="restartGame()">Restart</button>
+    <div id="scoreboard">
+    <p>Score - X: <span id="scoreX">0</span> | O: <span id="scoreO">0</span> | Draws: <span id="scoreDraw">0</span></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

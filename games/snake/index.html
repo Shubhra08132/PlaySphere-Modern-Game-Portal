@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snake Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="main-menu">
+    <h1 id="menu-title">Snake Retro</h1>
+    <p id="discript">Enter a world of elegance and instinct, where you guide a luminous trail <br>
+      through an ever-shifting grid.<br>
+      Every move is a choice. Every turn, a test of grace.
+      <br>Snake Retro is focus distilled—no noise, no clutter—only you<br> and the path you claim.</p>
+
+
+    <button id="startBtn">Start</button>
+  </div>
+
+  <div id="game" style="display:none;">
+    <button id="backButton" onclick="goBack()">⬅ Back</button>
+    <h1> Snake Retro</h1>
+    <div id="score">Score: 0</div> 
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <!-- Vertical buttons -->
+    <div id="horizontalButtons">
+      <button id="pauseResumeBtn">Pause</button>
+      <button id="restartBtn">Restart</button>
+    </div>
+  <audio id="eatSound" src="eating.mp3"></audio>
+  <audio id="gameOverSound" src="Game-Over.mp3"></audio>
+  <div id="gameOverMessage" style="display: none;" class="game-over">
+  Game Over! <br />
+  <span id="finalScore"></span>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

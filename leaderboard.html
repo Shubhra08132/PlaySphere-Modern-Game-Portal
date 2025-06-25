@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard - ArcadeHub</title>
+  <link rel="stylesheet" href="leaderboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo"> ArcadeHub</div>
+ <nav id="navbar">
+  <a href="index.html">Home</a>
+  <div id="user-info" style="display: none;">
+    <img src="avatar.png" alt="User Avatar" class="avatar" />
+    <span id="username-display">Username</span>
+  </div>
+</nav>
+  </header>
+
+  <main>
+    <h1> Leaderboard</h1>
+    <select id="game-selector">
+      <option value="TicTacToe">Tic Tac Toe</option>
+      <option value="Snake Retro">Snake Retro</option>
+      <option value="Flip And Match">Flip And Match</option>
+      <option value="BlockStacker">BlockStacker</option>
+      <option value="Maze-Escape">Maze-Escape</option>
+      <option value="BrickBreaker">Brick Breaker</option>
+    </select>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-body">
+        <!-- Scores inserted via JS -->
+      </tbody>
+    </table>
+  </main>
+
+  <script src="leaderboard.js"></script>
+</body>
+</html>

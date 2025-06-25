@@ -1,0 +1,147 @@
+/* Reset default margins and center content */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #C6E5B3;;
+  color: #225E63;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#menu-title {
+  position: absolute;
+  top: 30px;
+   left: 35%;
+  animation: slideIn 0.8s ease-in-out;
+  font-weight: bold;
+  font-size: 5em;
+  margin: 0;
+  text-align:centre;
+  padding: 20px;
+}
+
+#discript {
+  animation: fadeIn 1s ease-in-out;
+  position: fixed;
+  top: 150px;
+  left: 33%;
+  font-size: 1.1em;
+  color: #225E63;
+  text-align: center;
+  padding: 10px;
+  z-index: 999;
+}
+#startBtn {
+  position: absolute;
+  top: 320px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #225E63;
+  color: #ffffff;
+  border: 2px solid #225E63;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 30px;
+  cursor: pointer;
+  width: 150px;
+  box-shadow: 0 0 5px #225E63;
+   margin: 280px 8px; 
+  transition: background-color 0.2s, color 0.2s, transform 0.1s ease-in-out;
+}
+
+/* Canvas Styling */
+#gameCanvas {
+  position: relative;
+  background-color: #225E63;
+  border: 4px solid #225E63;
+  color:#225E63;
+  box-shadow: 0 0 10px #225E63
+  margin: 20px auto;
+  text-shadow: 0 0 5px #ccc, 0 0 10px #eee;
+}
+
+/* Score Display */
+#score {
+  margin-top: 5px;
+  margin-bottom:10px; 
+  font-size: 2.2rem;
+}
+
+.game-over {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ff073a;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px 40px;
+  border-radius: 10px;
+  border: 3px solid #ff073a;
+  text-shadow:
+    0 0 2px #ff073a,
+    0 0 4px #ff073a;
+  box-shadow: 0 0 8px #ff073a
+}
+
+
+/* Container for horizontal buttons */
+#horizontalButtons {
+  display: flex;
+  flex-direction: row;       /* horizontal layout */
+  justify-content: center;   /* center horizontally */
+  gap: 200px;             /* space between buttons */
+  margin-bottom: 3px;       /* space below this group */
+}
+
+/* Container for vertical buttons */
+#verticalButtons {
+  display: flex;
+  flex-direction: column;    /* vertical layout */
+  align-items: center;       /* center buttons horizontally */
+  gap: 15px; 
+  margin-top: 10px                /* space between buttons */
+}
+  
+/* Optional: style buttons consistently */
+button {
+width: 100px;
+height: 40px;
+ font-size: 16px;
+  padding: 10px 20px;
+  background-color: #225E63;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#backButton {
+  position: absolute;
+  font-size: 16px;
+  top: 10px;
+  left: 10px;
+  background-color: #225E63;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 10px 20px;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArcadeHub</title>
+  <link rel="stylesheet" href="home.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">ArcadeHub</div>
+<div class="search-container">
+  <input type="text" placeholder="Search games..." class="search-bar">
+  <i class="fas fa-search search-icon"></i>
+</div>
+
+<nav id="navbar">
+  <a href="leaderboard.html">Leaderboard</a>
+  <div id="user-info" style="display: none;">
+    <img src="account.png" alt="User Avatar" class="avatar" />
+    <a id="username-display">Username</a>
+  </div>
+  <a href="login.html" id="signin-link">Sign In</a>
+</nav>
+
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Play the Best Online Games</h1>
+    <p>Challenge your friends or play solo!</p>
+    <div class="buttons">
+      <button onclick="location.href='login.html">Start Game</button>
+      <button>Browse Games</button>
+    </div>
+  </section>
+
+<section class="games">
+
+  <a href="games/Flip_and_match/index.html" class="game-card">
+    <img src="images/Flip_and_match.png" alt="Game Image" class="game-image">
+    <h1>Flip And Match</h1>
+  </a>
+
+  <a href="games/Tic_Tac_Toe/index.html" class="game-card">
+    <img src="images/Tic_Tac_Toe.png" alt="Game Image" class="game-image">
+    <h1>Tic Tac Toe</h1>
+  </a>
+
+  <a href="games/block_stacker/index.html" class="game-card">
+    <img src="images/Block_Stacker.png" alt="Game Image" class="game-image">
+    <h1>Block Stacker</h1>
+  </a>
+
+  <a href="games/maze-escape/index.html" class="game-card">
+    <img src="images/Maze_Escape.png" alt="Game Image" class="game-image">
+    <h1>Maze Escape</h1>
+  </a>
+
+  <a href="games/brick-breaker/index.html" class="game-card">
+    <img src="images/Brick_Breaker.png" alt="Game Image" class="game-image">
+    <h1>Brick Breaker</h1>
+  </a>
+
+  <a href="games/snake/index.html" class="game-card">
+    <img src="images/Snake.png" alt="Game Image" class="game-image">
+    <h1>Snake Retro</h1>
+  </a>
+
+</section>
+
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 ArcadeHub. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
