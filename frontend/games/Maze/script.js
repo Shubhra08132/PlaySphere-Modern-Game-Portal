@@ -1,160 +1,209 @@
-let level = 1;
-let mazeSize = 10;
-let mazeLayout = [];
-let playerPos = {};
-let goalPos = {};
-let timer = 0;
-let interval = null;
-let gameRunning = false;
+document.getElementById("start-btn").addEventListener("click", () => {
+  document.getElementById("intro-screen").classList.add("hidden");
+  document.getElementById("game-screen").classList.remove("hidden");
+  startGame();
+});
 
-const maze = document.getElementById('maze');
+let menuVisible = false;
+
+document.getElementById("menu-btn").addEventListener("click", () => {
+  menuVisible = !menuVisible;
+  document.getElementById("menu-panel").style.display = menuVisible ? "block" : "none";
+});
+
+function toggleMenu() {
+  alert("Instructions: Use arrow keys to reach the green exit!");
+  document.getElementById("menu-panel").style.display = "none";
+  menuVisible = false;
+}
+
+function restartGame() {
+  playerPos = { row: 0, col: 0 };
+  generateMaze();
+  renderMaze();
+  clearInterval(timerInterval);
+  startTimer();
+  statusText.classList.add('hidden');
+}
+
+// ========== Core Game Logic ========== //
+const mazeContainer = document.getElementById('maze');
+const startBtn = document.getElementById('start-btn');
+const introScreen = document.getElementById('intro-screen');
 const statusText = document.getElementById('status');
 const timerDisplay = document.getElementById('timer');
 
-// Generate Maze (basic: open path around wall border)
-function generateMaze(size) {
-  const maze = Array.from({ length: size }, () => Array(size).fill(1));
-  const visited = Array.from({ length: size }, () => Array(size).fill(false));
+const rows = 10;  // maze rows
+const cols = 10;  // maze columns
+let grid = [];
+let playerPos = { row: 0, col: 0 };
+let goalPos = { row: rows - 1, col: cols - 1 };
+let startTime;
+let timerInterval;
 
-  const dx = [0, 0, -2, 2];
-  const dy = [-2, 2, 0, 0];
+// Directions: top, right, bottom, left
+const directions = [
+  { row: -1, col: 0 },
+  { row: 0, col: 1 },
+  { row: 1, col: 0 },
+  { row: 0, col: -1 },
+];
 
-  function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+// === Maze Cell ===
+class Cell {
+  constructor(row, col) {
+    this.row = row;
+    this.col = col;
+    this.visited = false;
+    this.walls = [true, true, true, true]; // top, right, bottom, left
+    this.element = null;
   }
 
-  function carve(x, y) {
-    visited[y][x] = true;
-    maze[y][x] = 0;
+  createElement() {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cell.style.borderTop = this.walls[0] ? '2px solid black' : '2px solid transparent';
+    cell.style.borderRight = this.walls[1] ? '2px solid black' : '2px solid transparent';
+    cell.style.borderBottom = this.walls[2] ? '2px solid black' : '2px solid transparent';
+    cell.style.borderLeft = this.walls[3] ? '2px solid black' : '2px solid transparent';
+    cell.style.backgroundColor = '#fff';
+    this.element = cell;
+    return cell;
+  }
+}
 
-    const directions = shuffle([0, 1, 2, 3]);
+function index(row, col) {
+  if (row < 0 || col < 0 || row >= rows || col >= cols) return -1;
+  return row * cols + col;
+}
 
-    for (let i = 0; i < 4; i++) {
-      const nx = x + dx[directions[i]];
-      const ny = y + dy[directions[i]];
+function generateMaze() {
+  grid = [];
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      grid.push(new Cell(row, col));
+    }
+  }
 
-      if (ny > 0 && ny < size - 1 && nx > 0 && nx < size - 1 && !visited[ny][nx]) {
-        // Carve path between (x,y) and (nx,ny)
-        maze[(y + ny) / 2][(x + nx) / 2] = 0;
-        carve(nx, ny);
+  let stack = [];
+  let current = grid[0];
+  current.visited = true;
+
+  while (true) {
+    const neighbors = [];
+
+    directions.forEach((dir, i) => {
+      const newRow = current.row + dir.row;
+      const newCol = current.col + dir.col;
+      const neighborIndex = index(newRow, newCol);
+      if (neighborIndex >= 0) {
+        const neighbor = grid[neighborIndex];
+        if (!neighbor.visited) {
+          neighbors.push({ cell: neighbor, direction: i });
+        }
       }
-    }
-  }
+    });
 
-  carve(1, 1); // start from (1,1)
-  maze[1][1] = 0; // Ensure start open
-  maze[size - 2][size - 2] = 0; // Ensure goal open
+    if (neighbors.length > 0) {
+      const rnd = Math.floor(Math.random() * neighbors.length);
+      const { cell: next, direction } = neighbors[rnd];
 
-  return maze;
-}
+      // Remove walls
+      current.walls[direction] = false;
+      const opposite = (direction + 2) % 4;
+      next.walls[opposite] = false;
 
-// Draw Maze
-function drawMaze() {
-  maze.innerHTML = '';
-  maze.style.gridTemplateColumns = `repeat(${mazeSize}, 40px)`;
-  maze.style.gridTemplateRows = `repeat(${mazeSize}, 40px)`;
-
-  for (let y = 0; y < mazeSize; y++) {
-    for (let x = 0; x < mazeSize; x++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      if (mazeLayout[y][x] === 1) cell.classList.add('wall');
-      else cell.classList.add('path');
-
-      if (x === playerPos.x && y === playerPos.y) cell.classList.add('player');
-      if (x === goalPos.x && y === goalPos.y) cell.classList.add('goal');
-
-      maze.appendChild(cell);
+      stack.push(current);
+      current = next;
+      current.visited = true;
+    } else if (stack.length > 0) {
+      current = stack.pop();
+    } else {
+      break;
     }
   }
 }
 
-// Timer
-function startTimer() {
-  interval = setInterval(() => {
-    timer++;
-    timerDisplay.textContent = `⏱️ Time: ${timer}s`;
-  }, 1000);
-}
-function stopTimer() {
-  clearInterval(interval);
+function renderMaze() {
+  mazeContainer.innerHTML = '';
+  mazeContainer.style.display = 'grid';
+  mazeContainer.style.gridTemplateRows = `repeat(${rows}, 40px)`;
+  mazeContainer.style.gridTemplateColumns = `repeat(${cols}, 40px)`;
+
+  grid.forEach(cell => {
+    mazeContainer.appendChild(cell.createElement());
+  });
+
+  updatePlayer();
 }
 
-// Movement
-function movePlayer(dx, dy) {
-  if (!gameRunning) return;
-  const newX = playerPos.x + dx;
-  const newY = playerPos.y + dy;
+function updatePlayer() {
+  grid.forEach(cell => {
+    cell.element.style.backgroundColor = '#fff';
+  });
 
-  if (
-    newX >= 0 && newX < mazeSize &&
-    newY >= 0 && newY < mazeSize &&
-    mazeLayout[newY][newX] === 0
-  ) {
-    playerPos = { x: newX, y: newY };
-    drawMaze();
+  const playerCell = grid[index(playerPos.row, playerPos.col)];
+  playerCell.element.style.backgroundColor = '#0ABAB5'; // player
+
+  const goalCell = grid[index(goalPos.row, goalPos.col)];
+  goalCell.element.style.backgroundColor = '#225E63'; // goal
+}
+
+function handleKey(e) {
+  const key = e.key;
+  let moveDir = -1;
+
+  if (key === 'ArrowUp') moveDir = 0;
+  if (key === 'ArrowRight') moveDir = 1;
+  if (key === 'ArrowDown') moveDir = 2;
+  if (key === 'ArrowLeft') moveDir = 3;
+
+  if (moveDir === -1) return;
+
+  const current = grid[index(playerPos.row, playerPos.col)];
+  if (!current.walls[moveDir]) {
+    playerPos.row += directions[moveDir].row;
+    playerPos.col += directions[moveDir].col;
+    updatePlayer();
     checkWin();
   }
 }
 
-// Win Check
 function checkWin() {
-  if (playerPos.x === goalPos.x && playerPos.y === goalPos.y) {
-    stopTimer();
-    gameRunning = false;
-    statusText.textContent = `🎉 Level ${level} complete in ${timer}s! Press Start for next level`;
-    level++;
+  if (playerPos.row === goalPos.row && playerPos.col === goalPos.col) {
+    clearInterval(timerInterval);
+    statusText.textContent = `🎉 You escaped in ${Math.floor((Date.now() - startTime) / 1000)} seconds!`;
+    statusText.classList.remove('hidden');
+    document.removeEventListener('keydown', handleKey); // 🗝️ Stop movement
   }
 }
 
-// Start Level
-function startLevel() {
-  mazeSize = 10 + (level - 1) * 2;
-  mazeLayout = generateMaze(mazeSize);
-  playerPos = { x: 1, y: 1 };
-  goalPos = { x: mazeSize - 2, y: mazeSize - 2 };
-  timer = 0;
-  timerDisplay.textContent = "⏱️ Time: 0s";
-  gameRunning = true;
-  drawMaze();
+function startTimer() {
+  startTime = Date.now();
+  timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    timerDisplay.textContent = `⏱️ Time: ${elapsed}s`;
+  }, 1000);
+}
+
+
+
+// === Start Game ===
+function startGame() {
+  playerPos = { row: 0, col: 0 };
+  generateMaze();
+  renderMaze();
   startTimer();
-  statusText.textContent = `🧠 Level ${level} - Reach the goal!`;
+  document.addEventListener('keydown', handleKey);
+  document.getElementById("menu-panel").style.display = "none";
+  menuVisible = false;
+  // document.getElementById("status").classList.add("hidden");
+  
+  document.getElementById("start-btn").style.display = "none";
+    document.querySelector("#game-screen h2").classList.remove("hidden");
+  document.getElementById("status").classList.remove("hidden");
+
 }
 
-// Reset to Level 1
-function resetGame() {
-  stopTimer();
-  level = 1;
-  startLevel();
-}
 
-// Event Listeners
-document.addEventListener('keydown', (e) => {
-  if (!gameRunning) return;
-  switch (e.key) {
-    case "ArrowUp": movePlayer(0, -1); break;
-    case "ArrowDown": movePlayer(0, 1); break;
-    case "ArrowLeft": movePlayer(-1, 0); break;
-    case "ArrowRight": movePlayer(1, 0); break;
-  }
-});
 
-document.getElementById('startBtn').addEventListener('click', () => {
-  if (!gameRunning) startLevel();
-});
-
-document.getElementById('pauseBtn').addEventListener('click', () => {
-  if (gameRunning) {
-    gameRunning = false;
-    stopTimer();
-    statusText.textContent = "⏸️ Game paused.";
-  }
-});
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-  resetGame();
-});

@@ -6,7 +6,7 @@ body {
   text-align: center;
   padding: 30px;
   font-weight: bold;
-  background: #C6E5B3;;
+  background: #C6E5B3;
   flex-direction: column;
   overflow-x: hidden;
 }
@@ -157,7 +157,7 @@ h1 {
   cursor: pointer;
 }
 
-/* #menu-panel {
+/*#menu-panel {
   position: fixed;
   top: 100px;
   left: 500px;

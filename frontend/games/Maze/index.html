@@ -3,22 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arcade Maze Game</title>
+  <title> Maze Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>🕹️ Maze Game</h1>
+  <!-- Add this near your Play button -->
 
-  <div class="controls">
-    <button id="startBtn">Start</button>
-    <button id="pauseBtn">Pause</button>
-    <button id="resetBtn">New Game</button>
-    <span id="timer">⏱️ Time: 0s</span>
+  <div id="menu-panel" class="hidden">
+    <div class="menu-box">
+      <button onclick="restartGame()"> Restart</button>
+      <button onclick="toggleMenu()"> Instructions</button>
+      <button onclick="location.reload()"> Quit</button>
+    </div>
+  </div>
+  <!-- Intro Screen -->
+  <div class="intro-screen" id="intro-screen">
+    <h1> Maze Escape</h1>
+    <p id="discript">Find your way out—before it’s too late!<br>
+    Twist and turn through a maze full of surprises.<br>
+    Race against time to reach the exit as quickly as you can.<br>
+    The faster your escape, the better your score!<br>
+    </p> 
+    <div class="teaser-container">
+      <img src="Avatar.png" alt="Avatar" class="avatar-bob" />
+      <div class="ready-text">“Ready?”</div>
+    </div>
   </div>
 
-  <div id="maze"></div>
-  <p id="status">Press Start to begin!</p>
+  <button id="start-btn">Play</button>
 
+  <!-- Game Screen -->
+  <div class=" game-screen hidden" id="game-screen">
+   <button id="menu-btn">☰ Menu</button>
+   <h2 class="hidden">Maze Escape</h2>
+   <div class="maze" id="maze"></div>
+   <p id="status" class="hidden">Find your way out!</p>
+   <div id="timer"> Time: 0s</div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>

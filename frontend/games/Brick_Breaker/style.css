@@ -48,14 +48,121 @@ h1 {
   padding: 10px;
   z-index: 999;
 }
-.hidden {
-  display: none;
-}
 
 #status {
   margin-top: 20px;
   font-size: 1.2em;
 }
+
+.hidden {
+  display: none;
+}
+
+.intro-screen {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+#start-btn {
+  position: absolute;
+  top: 320px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #225E63;
+  color: #ffffff;
+  border: 2px solid #225E63;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 200px;
+  box-shadow: 0 0 5px #225E63;
+  margin: 280px 8px;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s ease-in-out;
+}
+#game-screen{
+  color: #225E63;
+  font-size: 1.4em;
+
+}
+
+#start-btn:hover {
+  background-color: #225E63;
+  color: #ffffff;
+  transform: translateX(-50%) scale(1.05);
+}
+
+#menu-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  padding: 10px 15px;
+  background-color: #225E63;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#menu-panel {
+  display: none; /* 👈 hide it by default */
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  background: #ffffff;
+  border: 2px solid #225E63;
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 2000;
+}
+
+
+.menu-box button {
+  padding: 10px 20px;
+  background-color: #225E63;
+  border: 2px solid #3b82f6;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 100%;
+  margin: 10px 0;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s ease-in-out;
+}
+
+#timer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-weight: bold;
+  background: #225E63;;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1001;
+}
+
+#lives-display {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #225E63; /* or any color you like */
+}
+
+#score-display {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #225E63;
+}
+
 
 .avatar-bob {
   position: absolute;
@@ -89,110 +196,14 @@ h1 {
 
 
 
-#start-btn {
-  position: absolute;
-  top: 320px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  background-color: #225E63;
-  color: #ffffff;
-  border: 2px solid #225E63;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 2rem;
-  cursor: pointer;
-  width: 200px;
-  box-shadow: 0 0 5px #225E63;
-  margin: 280px 8px;
-  transition: background-color 0.2s, color 0.2s, transform 0.1s ease-in-out;
-}
-
-#start-btn:hover {
-  background-color: #1b4b4f;
-}
-
 #menu-btn {
   position: absolute;
   top: 20px;
   left: 20px;
-  z-index: 1001;
-  padding: 10px 15px;
-  background-color: #225E63;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-/* 
-#menu-btn:hover {
-  background-color: #1b4b4f;
-} */
-
-
-.menu-box button {
-  padding: 10px 20px;
-  background-color: #225E63;
-  border: 2px solid #3b82f6;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 2rem;
-  cursor: pointer;
-  width: 100%;
-  margin: 10px 0;
-  transition: background-color 0.2s, color 0.2s, transform 0.1s ease-in-out;
-}
-
-/* #menu-panel {
-  position: fixed;
-  top: 80px;
-  left: 20px;
-  background: #EEEFE0;
-  border: 2px solid #225E63;
-  border-radius: 8px;
-  padding: 20px;
-  z-index: 2000;
-  transform: translateX(-120%); /* hide to left 
-  transition: transform 0.3s ease-in-out; smooth slide 
-}
-
-/* #menu-panel.show {
-  transform: translateX(0); /* slide in 
 }
 
 
-/* === Game Screen === */
-#game-screen{
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+canvas {
+  border: 1px solid #000;
+  background: #225E63;
 }
-
-#maze {
-  margin-top: 50px;
-  color:#C6E5B3;
-}
-
-.cell {
-  box-sizing: border-box;
-  width: 40px;
-  height: 40px;
-}
-
-
-#timer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-weight: bold;
-  background: #225E63;;
-  color: #ffffff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  z-index: 1001;
-}
-
-

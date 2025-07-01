@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Brick Breaker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Menu Panel -->
+  <div id="menu-panel">
+    <div class="menu-box">
+      <button onclick="restartGame()">Restart</button>
+      <button onclick="showInstructions()">Instructions</button>
+      <button onclick="location.reload()">Quit</button>
+    </div>
+  </div>
+
+  <!-- Intro Screen -->
+  <div class="intro-screen" id="intro-screen">
+    <h1>Brick Breaker</h1>
+    <p id="discript">Smash your way to victory!<br>
+        Use your paddle to bounce the ball and break all the bricks on the screen.<br>
+        Stay sharp — the ball gets faster and changes direction unexpectedly!<br>
+        Don’t let the ball fall below the paddle<br>
+        Break every last brick to win and claim your high score!
+    </p>
+    <div class="teaser-container">
+      <img src="Avatar.png" alt="Avatar" class="avatar-bob" />
+      <div class="ready-text">“Ready?”</div>
+    </div>
+  </div>
+
+   <button id="start-btn">Play</button>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="hidden">
+    <button id="menu-btn">☰ Menu</button>
+    <h2>Brick Breaker</h2>
+    <div id="lives-display">Lives: 3</div>
+    <div id="score-display">Score: 0</div>
+    <canvas id="gameCanvas" width="480" height="320"></canvas>
+    <p id="status">Smash your way to victory!</p>
+    
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
