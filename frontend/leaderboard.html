@@ -12,8 +12,8 @@
     <div class="logo"> ArcadeHub</div>
  <nav id="navbar">
   <a href="index.html">Home</a>
-  <div id="user-info" style="display: none;">
-    <img src="avatar.png" alt="User Avatar" class="avatar" />
+  <div id="user-info">
+    <img src="images/account.png" alt="User Avatar" class="avatar" />
     <span id="username-display">Username</span>
   </div>
 </nav>
@@ -22,7 +22,6 @@
   <main>
     <h1> Leaderboard</h1>
     <select id="game-selector">
-      <option value="TicTacToe">Tic Tac Toe</option>
       <option value="Snake Retro">Snake Retro</option>
       <option value="Flip And Match">Flip And Match</option>
       <option value="BlockStacker">BlockStacker</option>
@@ -30,7 +29,7 @@
       <option value="BrickBreaker">Brick Breaker</option>
     </select>
 
-    <table>
+    <table id="leaderboard-table">
       <thead>
         <tr>
           <th>Rank</th>

@@ -90,33 +90,87 @@ button {
 }
 
 
-#menu-button > button {
-  background: #225E63;
-  color:#fff;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 20;
-  padding: 8px 16px;
-  font-size: 1rem;
+#menu-button {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  z-index: 1000;
 }
 
-.dropdown {
+#menu-toggle {
+  background-color: #225E63;
+  color: white;
+  font-size: 1rem;
+  border: 2px solid #3b82f6;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Dropdown Panel ========== */
+#menu-dropdown.dropdown {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 180px;
+  background-color: #225E63;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  background: #333;
-  border-radius: 6px;
-  margin-top: 5px;
-  padding: 5px;
 }
 
-.dropdown button {
-  background: #444;
+#menu-dropdown.dropdown button {
+  background-color: #1b4b4f;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
   margin: 5px 0;
-  font-size: 0.9rem;
+  padding: 10px;
+  border: 1px solid #3b82f6;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
 }
+
+#menu-dropdown.dropdown button:hover {
+  background-color: #144042;
+  transform: scale(1.03);
+}
+
 
 #game-over-message {
   margin-top: 20px;
   text-align: center;
+}
+.avatar-bob {
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(150px, 40vw, 200px);
+  height: 250px;
+  animation: bob 2s ease-in-out infinite;
+  z-index: 600;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.ready-text {
+  text-shadow: 2px 2px #EEEFE0;
+  position: absolute;
+  top: 550px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4em;
+  margin-top: 10px;
+  color: #2c3e50;
+  font-weight: bold;
+  animation: bob 2s ease-in-out infinite;
+  z-index: 901;
 }

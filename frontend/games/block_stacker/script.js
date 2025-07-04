@@ -7,6 +7,13 @@ const canvas = document.getElementById("game-canvas");
 const ctx = canvas.getContext("2d");
 const gameOverMessage = document.getElementById("game-over-message");
 
+const username = localStorage.getItem("username");
+
+if (!username) {
+   console.warn("No username found. Please log in to save score.");
+   // Optional: Redirect to login page
+}
+
 const menuBtn = document.getElementById("menu-button");
 const dropdown = document.getElementById("menu-dropdown");
 const menuToggleBtn = document.getElementById("menu-toggle");
@@ -132,11 +139,22 @@ function placeBlock() {
 }
 
 function endGame() {
+  console.log("Game ended. Saving score..."); 
   gameRunning = false;
   cancelAnimationFrame(animationId);
   finalScore.textContent = score;
   gameOverMessage.classList.remove("hidden");
+
+  const username = localStorage.getItem("username");
+  console.log("Username:", username); 
+  if (!username) {
+    console.error("⚠️ No username found. Please log in to save score.");
+    return;
+  }
+
+  saveScoreToLeaderboard("BlockStacker", username, score);
 }
+
 
 function restartGame() {
   dropdown.classList.add("hidden");
@@ -153,7 +171,7 @@ function backToMenu() {
 }
 
 function showInstructions() {
-  alert("🧱 Tap or click to drop a block.\nAlign it carefully with the one below.\nThe more precise you are, the longer you can stack!\nGood luck!");
+  alert("Tap or click to drop a block.Align it carefully with the one below.\nThe more precise you are, the longer you can stack!\nGood luck!");
   dropdown.classList.add("hidden");
 }
 
@@ -163,3 +181,21 @@ document.addEventListener("click", (event) => {
     dropdown.classList.add("hidden");
   }
 });
+
+//save score in MONGODB
+function saveScoreToLeaderboard(game, username, score) {
+  fetch("http://localhost:5000/api/submit-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username, game, score })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Score submitted:", data);
+  })
+  .catch(err => {
+    console.error("Error submitting score:", err);
+  });
+}

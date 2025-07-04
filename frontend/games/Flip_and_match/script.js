@@ -83,11 +83,10 @@ function handleFlip(e) {
       matchedPairs++;
 
       if (matchedPairs === emojis.length) {
-        document.getElementById("status").textContent = "🎉 You matched all pairs!";
-        stopTimer();
-      }
-
-      resetTurn();
+    document.getElementById("status").textContent = ` You matched all pairs in ${secondsElapsed} seconds!`;
+    endGame();
+    }
+    resetTurn();
     } else {
       setTimeout(() => {
         first.classList.remove("flipped");
@@ -96,6 +95,18 @@ function handleFlip(e) {
       }, 800);
     }
   }
+}
+
+function endGame() {
+  stopTimer();
+  const username = localStorage.getItem("username");
+  if (!username) {
+    console.error("⚠️ No username found. Please log in to save score.");
+    return;
+  }
+
+  console.log("Username:", username);
+  saveScoreToLeaderboard("Flip And Match", username, secondsElapsed);
 }
 
 function resetTurn() {
@@ -120,3 +131,20 @@ function stopTimer() {
   clearInterval(timerInterval);
 }
 
+//save score in MONGODB
+function saveScoreToLeaderboard(game, username, score) {
+  fetch("http://localhost:5000/api/submit-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username, game, score })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Score submitted:", data);
+  })
+  .catch(err => {
+    console.error("Error submitting score:", err);
+  });
+}

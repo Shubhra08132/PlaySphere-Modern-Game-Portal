@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const User = require('./models/User');
-const authRoutes = require('./routes/auth'); // adjust path as neede
+const authRoutes = require('./routes/auth'); // adjust path as needed
+
+const Score = require("./models/Score");
 
 require('dotenv').config();
 
@@ -60,10 +62,9 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// ✅ Start server
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
 
+//Login
 app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -74,8 +75,48 @@ app.post('/api/auth/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    res.json({ message: "Login successful!", token: "dummy-token" }); // replace with real JWT if needed
+    res.json({ message: "Login successful!", token: "dummy-token",username: user.username }); // replace with real JWT if needed
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+// Example POST route to store score
+app.post("/api/submit-score", async (req, res) => {
+  const { username, game, score } = req.body;
+  console.log("New score received:", username, game, score); 
+  if (!username || !game || score == null) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+
+  try {
+    const newScore = new Score({ username, game, score });
+    await newScore.save();
+    res.status(201).json({ message: "Score saved!" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to save score", details: err });
+  }
+});
+
+// ========== Get Top Scores ==========
+app.get("/api/leaderboard/:game", async (req, res) => {
+  const game = req.params.game;
+  try {
+    const topScores = await Score.find({ game })
+      .sort({ score: -1 })
+      .limit(10);
+
+      // Map to only username and score
+    const response = topScores.map(score => ({
+      username: score.username,
+      score: score.score
+    }));
+    
+    res.json(topScores);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch leaderboard" });
+  }
+});
+
+// ✅ Start server
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

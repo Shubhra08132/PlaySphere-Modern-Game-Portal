@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         localStorage.setItem("token", data.token);
         alert("Login successful!");
+        localStorage.setItem("username", data.username);
         window.location.href = "index.html";
       } else {
         alert(data.message);

@@ -7,35 +7,49 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="main-menu">
-    <h1 id="menu-title">Snake Retro</h1>
-    <p id="discript">Enter a world of elegance and instinct, where you guide a luminous trail <br>
-      through an ever-shifting grid.<br>
-      Every move is a choice. Every turn, a test of grace.
-      <br>Snake Retro is focus distilled—no noise, no clutter—only you<br> and the path you claim.</p>
-
-
-    <button id="startBtn">Start</button>
+  <div id="menu-panel" class="hidden">
+    <div class="menu-box">
+      <button onclick="restartGame()"> Restart</button>
+      <button onclick="toggleMenu()"> Instructions</button>
+      <button onclick="location.reload()"> Quit</button>
+    </div>
+  </div>
+  <!-- Intro Screen -->
+  <div class="intro-screen" id="intro-screen">
+    <h1>Snake Retro</h1>
+    <p id="discript">Slither through the grid and chase your next meal!<br>
+      Navigate your growing snake with sharp reflexes and quick thinking.<br>
+      Avoid walls, dodge your own tail, and go for the high score!<br>
+    </p> 
+    <div class="teaser-container">
+      <img src="Avatar.png" alt="Avatar" class="avatar-bob"/>
+      <div class="ready-text">“Ready to slither?”</div>
+    </div> 
+  <button id="start-btn">Start</button>
   </div>
 
-  <div id="game" style="display:none;">
-    <button id="backButton" onclick="goBack()">⬅ Back</button>
-    <h1> Snake Retro</h1>
-    <div id="score">Score: 0</div> 
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <!-- Vertical buttons -->
-    <div id="horizontalButtons">
-      <button id="pauseResumeBtn">Pause</button>
-      <button id="restartBtn">Restart</button>
-    </div>
-  <audio id="eatSound" src="eating.mp3"></audio>
-  <audio id="gameOverSound" src="Game-Over.mp3"></audio>
-  <div id="gameOverMessage" style="display: none;" class="game-over">
-  Game Over! <br />
-  <span id="finalScore"></span>
+
+    <!-- Game Menu Button (Top-Left) -->
+<div id="menu-button" class="hidden" >
+  <button id="menu-toggle">Menu ☰</button>
+  <div id="menu-dropdown" class="dropdown hidden">
+    <button onclick="restartGame()">Restart</button>
+    <button onclick="showInstructions()">Instructions</button>
+    <button onclick="backToMenu()">Exit</button>
   </div>
 </div>
-
+  
+  <!-- Game Screen -->
+  <div class="game-screen hidden" id="game-screen" >
+    <h2> Snake Retro</h2>
+    <canvas id="gameCanvas" width="520" height="400"></canvas>
+    <p id="status" class="hidden">Match all the pairs!</p>
+    <div id="score">Score: 0</div> 
+    <div id="game-over-message" class="hidden">
+      <h2>Game Over</h2>
+      <p>Your Score: <span id="final-score">0</span></p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

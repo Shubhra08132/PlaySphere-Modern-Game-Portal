@@ -157,30 +157,29 @@ h1 {
   cursor: pointer;
 }
 
-/*#menu-panel {
-  position: fixed;
-  top: 100px;
-  left: 500px;
-  width: 50%;
+ #menu-panel {
+  position: absolute;
+  top: 60px;           /* adjust based on your #menu-btn height */
+  left: 20px;          /* same as #menu-btn left */
+  width: 250px;
   height: 30%;
   background-color: #36b82f;
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 10;
-  background: #225E63;
-} */
+  background: #C6E5B3;
+} 
 
 .menu-box button {
   padding: 10px 20px;
   background-color: #225E63;
-  border: 2px solid #3b82f6;
   border-radius: 5px;
   font-weight: bold;
   font-size: 2rem;
   cursor: pointer;
   width: 100%;
-  margin: 10px 0;
+  margin: 5px 0;
   transition: background-color 0.2s, color 0.2s, transform 0.1s ease-in-out;
 }
 

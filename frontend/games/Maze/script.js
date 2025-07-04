@@ -24,6 +24,8 @@ function restartGame() {
   clearInterval(timerInterval);
   startTimer();
   statusText.classList.add('hidden');
+  document.getElementById("menu-panel").style.display = "none";
+  menuVisible = false;
 }
 
 // ========== Core Game Logic ========== //
@@ -171,12 +173,27 @@ function handleKey(e) {
 
 function checkWin() {
   if (playerPos.row === goalPos.row && playerPos.col === goalPos.col) {
-    clearInterval(timerInterval);
-    statusText.textContent = `🎉 You escaped in ${Math.floor((Date.now() - startTime) / 1000)} seconds!`;
-    statusText.classList.remove('hidden');
-    document.removeEventListener('keydown', handleKey); // 🗝️ Stop movement
+    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    endGame(`🎉 You escaped in ${elapsedTime} seconds!`);
+
   }
 }
+
+function endGame(message) {
+  clearInterval(timerInterval);
+  statusText.textContent = message;
+  statusText.classList.remove('hidden');
+  document.removeEventListener('keydown', handleKey); // Disable movement
+  const username = localStorage.getItem("username");
+  if (!username) {
+    console.error("⚠️ No username found. Please log in to save score.");
+    return;
+  }
+
+  console.log("Username:", username);
+  saveScoreToLeaderboard("Flip And Match", username, secondsElapsed);
+}
+
 
 function startTimer() {
   startTime = Date.now();
@@ -203,6 +220,23 @@ function startGame() {
     document.querySelector("#game-screen h2").classList.remove("hidden");
   document.getElementById("status").classList.remove("hidden");
 
+}
+//save score in MONGODB
+function saveScoreToLeaderboard(game, username, score) {
+  fetch("http://localhost:5000/api/submit-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username, game, score })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Score submitted:", data);
+  })
+  .catch(err => {
+    console.error("Error submitting score:", err);
+  });
 }
 
 

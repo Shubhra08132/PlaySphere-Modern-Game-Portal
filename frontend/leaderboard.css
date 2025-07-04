@@ -1,8 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background-color: #c9eac3;
   color: #FFE3BB;
-  margin: 0;
+  /* margin: 0; */
   font-family: Arial, sans-serif;
   padding: 20px;
 }
@@ -15,15 +19,10 @@ header {
   background: #3D8D7A;
   color: #A3D1C6;
   height: 90px;  /* Optional: sets consistent height */
-  padding: 10px 20px;
 }
 header .logo {
   font-size: 50px;
   font-weight: bold;
-}
-
-.logo {
-  font-size: 18px;
 }
 
 nav {
@@ -37,9 +36,28 @@ nav a {
   text-decoration: none;
   display: inline-block; 
 }
+nav a:first-child {
+ font-size: 20px;
+ margin-top: 20px;
+} 
 
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
 
-  /* gap: 15px; */
+#user-info {
+  display: flex;
+  height: 30px;
+  width: 30px;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+  gap: 8px;
+  color: #A3D1C6;
+} 
+
 
 
 main {
@@ -69,6 +87,7 @@ table {
 
 th, td {
   padding: 12px;
+  color:#3D8D7A;
   border-bottom: 1px solid #3D8D7A;
 }
 
