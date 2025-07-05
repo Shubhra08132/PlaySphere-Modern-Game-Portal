@@ -174,12 +174,12 @@ function handleKey(e) {
 function checkWin() {
   if (playerPos.row === goalPos.row && playerPos.col === goalPos.col) {
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    endGame(`🎉 You escaped in ${elapsedTime} seconds!`);
+    endGame(`🎉 You escaped in ${elapsedTime} seconds!`, elapsedTime);
 
   }
 }
 
-function endGame(message) {
+function endGame(message, elapsedTime) {
   clearInterval(timerInterval);
   statusText.textContent = message;
   statusText.classList.remove('hidden');
@@ -191,7 +191,7 @@ function endGame(message) {
   }
 
   console.log("Username:", username);
-  saveScoreToLeaderboard("Flip And Match", username, secondsElapsed);
+  saveScoreToLeaderboard("Maze-Escape", username, elapsedTime);
 }
 
 

@@ -174,3 +174,15 @@ button {
   animation: bob 2s ease-in-out infinite;
   z-index: 901;
 }
+#score {
+  color: #225E63;
+  font-weight: bold;
+  font-size: 1.4em;
+  margin-top: 10px;
+}
+/* #final-score
+{
+  color: #225E63;
+  font-weight: bold;
+  font-size: 1.4em;
+} */

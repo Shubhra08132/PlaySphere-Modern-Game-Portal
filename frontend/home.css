@@ -1,16 +1,23 @@
-
-
-/* Reset + Font
-{
+body {
+  background-color: #c9eac3;
+  color: #FFE3BB;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
 }
- Layout body {
-  background: linear-gradient(to bottom, #344CB7, #577BC1);
-  color:#FFEB00;
-} */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;   /* This vertically centers all children */
+  padding: 20px 60px;
+  background: #3D8D7A;
+  color: #A3D1C6;
+  height: 90px;  /* Optional: sets consistent height */
+}
+header .logo {
+  font-size: 50px;
+  font-weight: bold;
+}
 
 nav {
   display: flex;
@@ -27,6 +34,13 @@ nav a:first-child {
  font-size: 20px;
  margin-top: 20px;
 } 
+
+#signin-link
+{
+  font-size: 20px;
+  margin-top: 20px;
+
+}
 
 .avatar {
   width: 40px;
@@ -45,35 +59,6 @@ nav a:first-child {
   gap: 8px;
   color: #A3D1C6;
 } 
-
-body {
-  background-color: #c9eac3;
-  color: #FFE3BB;
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;   /* This vertically centers all children */
-  padding: 20px 60px;
-  background: #3D8D7A;
-  color: #A3D1C6;
-  height: 90px;  /* Optional: sets consistent height */
-}
-header .logo {
-  font-size: 50px;
-  font-weight: bold;
-}
-
-/* header nav a {
-  font-size: 15px;
-  margin: 0 20px;
-  text-decoration: none;
-  color: #A3D1C6;
-} */
 
 header nav a:hover {
   color: #344CB7;
@@ -191,7 +176,7 @@ footer {
   position: absolute;
   top: 48%;
   left:765px;
+  color: #577BC1;
   transform: translateY(-50%);
-  color: #ccc;
   font-size: 20px;
 }

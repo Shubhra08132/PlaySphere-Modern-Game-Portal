@@ -103,7 +103,15 @@ function draw() {
     clearInterval(game);
     finalScore.textContent = score;
     gameOverMessage.classList.remove("hidden");
-    return;
+    const username = localStorage.getItem("username");
+if (!username) {
+  console.error("⚠️ No username found.");
+  return;
+}
+
+console.log("Username:", username);
+saveScoreToLeaderboard("Snake Retro", username, score);
+
   }
 
   if (headX === food.x && headY === food.y) {
@@ -187,4 +195,20 @@ function collision(x, y, array) {
     }
   }
   return false;
+}
+function saveScoreToLeaderboard(game, username, score) {
+  fetch("http://localhost:5000/api/submit-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username, game, score })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Score submitted:", data);
+  })
+  .catch(err => {
+    console.error("Error submitting score:", err);
+  });
 }
